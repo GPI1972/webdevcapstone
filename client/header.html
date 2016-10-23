@@ -1,0 +1,39 @@
+<!-- The Archivist -->
+<!-- Template for Navigation Bar -->
+<template name="header">
+  <div class="navbar navbar-default" role="navigation">
+    <div class="container">
+      
+	  <!-- Collapsed nav bar -->
+		<div class="navbar-header">
+			<button
+				type="button"
+				class="navbar-toggle collapsed"
+				data-toggle="collapse"
+				data-target="#main_navbar"
+				aria-expanded="false">Menu</button>
+				
+				<a href="/" class="navbar-brand">
+					<!-- <img src="mauritius_flag.png" alt="Welcome to Mauritius" height="25px"/> -->
+					The Archivist
+				</a>
+		</div><!-- End Collapsed nav bar -->
+	  
+	  <!-- Un-collapsed nav bar -->
+		<div class="collapse navbar-collapse" id="main_navbar">
+			<ul class="nav navbar-nav navbar-right">
+				<!-- {{> loginButtons align="right"}} -->
+				{{> loginButtons}}
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-right">
+			  <li>
+				<a href="browse">Search</a>
+			  </li>
+			</ul>
+
+      </div><!-- End Un-collapsed nav bar -->
+    
+	</div>
+  </div>
+</template>
