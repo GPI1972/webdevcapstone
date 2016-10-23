@@ -9,10 +9,12 @@ Router.route('/', function () {
   this.render('landing');
 });
 
-Router.route('/browse', function () {
-  this.render('browse');
+Router.route('/main', function () {
+  this.render('main');
 });
 
-Router.route('/:_id', function () {
-  this.render('doclist');
-});
+
+//
+//Router.route('/:_id', function () {
+//  this.render('doclist');
+//});

@@ -1,0 +1,97 @@
+<!-- The Archivist -->
+<!-- Template for Main Contents -->
+<template name="main">
+	<div class="container">
+		<!-- Main Buttons -->
+		<a class="btn btn-default js-toggle-projects" href="#">
+			<span class="" aria-hidden="true">Browse All</span>
+		</a>
+		
+		<a class="btn btn-default js-toggle-search-panel" href="#">
+			<span class="" aria-hidden="true">Advanced Search</span>
+		</a>
+		
+		<p></p>
+	
+		<!-- Advanced search panel -->
+		<div id="search_panel" class="hidden_div">
+			<form class="js-search-panel">
+			  <div class="form-group">
+				<label for="search_job_no">Job Number</label>
+				<input type="text" class="form-control" id="search_job_no" placeholder="Enter job number">
+			  </div>
+			  <div class="form-group">
+				<label for="search_job_title">Job Title</label>
+				<input type="text" class="form-control" id="search_job_title" placeholder="Enter job title">
+			  </div>
+				<div class="form-group">
+				<label for="search_project_manager">Project Manager</label>
+				<input type="text" class="form-control" id="search_project_manager" placeholder="Enter project manager">
+			  </div>
+
+			  <button type="submit" class="btn btn-default js-search-panel">Search</button>
+			</form>
+		</div>
+		
+		<!-- Archived Project List -->
+		<div id="project_list" class="hidden_div js-toggle-project-list">
+			<b>Archived Project List</b>
+			
+			<!-- Table Header Row -->
+			<div class="row list-group-item">
+				<div class="col-lg-3">
+					<b>Job Number</b>
+				</div>
+				<div class="col-lg-3">
+					<b>Job Title</b>
+				</div>
+				<div class="col-lg-3">
+					<b>Project Manager</b>
+				</div>
+				<div class="col-lg-3">
+					<b>Date</b>
+				</div>
+			</div>
+			
+			<!-- Default project list -->
+			{{#each projects}}
+			<div class="row list-group-item">
+				<div class="col-lg-3">
+					<a href="#" class="js-jobno">{{jobno}}</a>
+				</div>
+				<div class="col-lg-3">
+					{{jobname}}
+				</div>
+				<div class="col-lg-3">
+					{{jobmanager}}
+				</div>
+				<div class="col-lg-3">
+					{{jobcreated}}
+				</div>
+			</div>
+			{{/each}}
+		</div>
+		
+		<!-- List of Docs for Specific Project -->
+		<div id="doc_list" class="hidden_div js-toggle-doc-list">
+			<b>Documents for {{job_no}}</b>
+			
+			<!-- Document List -->
+			{{#each docs}}
+			<div class="row list-group-item">
+				<div class="col-lg-3">
+					<p style="color:blue;">{{doctitle}}</p>
+				</div>
+				<div class="col-lg-9">
+					<p>Type: <i style="color:blue;">{{doctype}}</i></p>
+					<p>Ref: <i style="color:blue;">{{docref}}</i></p>
+					<p>Author: <i style="color:blue;">{{docauthor}}</i></p>
+					<p>Date: <i style="color:blue;">{{docdate}}</i></p>
+					<p>Location: <i style="color:blue;">{{doclocation}}</i></p>
+				</div>
+			</div>
+			{{/each}}
+		</div>
+		
+	</div>
+</template>
