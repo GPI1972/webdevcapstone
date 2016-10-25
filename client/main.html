@@ -8,27 +8,30 @@
 		</a>
 		
 		<a class="btn btn-default js-toggle-search-panel" href="#">
-			<span class="" aria-hidden="true">Advanced Search</span>
+			<span class="" aria-hidden="true">Search Documents</span>
 		</a>
 		
+		{{#if isAdmin}}
+		<a class="btn btn-default js-toggle-new-project" href="#">
+			<span class="" aria-hidden="true">New Project</span>
+		</a>
+		
+		<a class="btn btn-default js-toggle-new-doc" href="#">
+			<span class="" aria-hidden="true">New Document</span>
+		</a>
+		{{/if}}
+		
+		<hr>
 		<p></p>
 	
 		<!-- Advanced search panel -->
 		<div id="search_panel" class="hidden_div">
 			<form class="js-search-panel">
 			  <div class="form-group">
-				<label for="search_job_no">Job Number</label>
-				<input type="text" class="form-control" id="search_job_no" placeholder="Enter job number">
+				<label for="search_keywords">Key Words</label>
+				<input type="text" class="form-control" id="search_keywords" placeholder="Enter keywords">
 			  </div>
-			  <div class="form-group">
-				<label for="search_job_title">Job Title</label>
-				<input type="text" class="form-control" id="search_job_title" placeholder="Enter job title">
-			  </div>
-				<div class="form-group">
-				<label for="search_project_manager">Project Manager</label>
-				<input type="text" class="form-control" id="search_project_manager" placeholder="Enter project manager">
-			  </div>
-
+			  
 			  <button type="submit" class="btn btn-default js-search-panel">Search</button>
 			</form>
 		</div>
@@ -36,7 +39,7 @@
 		<!-- Archived Project List -->
 		<div id="project_list" class="hidden_div js-toggle-project-list">
 			<b>Archived Project List</b>
-			
+			<p></p>
 			<!-- Table Header Row -->
 			<div class="row list-group-item">
 				<div class="col-lg-3">
@@ -75,7 +78,7 @@
 		<!-- List of Docs for Specific Project -->
 		<div id="doc_list" class="hidden_div js-toggle-doc-list">
 			<b>Documents for {{job_no}}</b>
-			
+			<p></p>
 			<!-- Document List -->
 			{{#each docs}}
 			<div class="row list-group-item">
@@ -93,5 +96,77 @@
 			{{/each}}
 		</div>
 		
-	</div>
+		<!-- New project panel -->
+		<div id="new_proj_panel" class="hidden_div">
+			<form class="js-new-proj-panel">
+			  <div class="form-group">
+				<label for="new_job_no">Job Number</label>
+				<input type="text" class="form-control" id="new_job_no" placeholder="Enter job number">
+			  </div>
+			  <div class="form-group">
+				<label for="new_job_title">Job Title</label>
+				<input type="text" class="form-control" id="new_job_title" placeholder="Enter job title">
+			  </div>
+			  <div class="form-group">
+				<label for="new_project_manager">Project Manager</label>
+				<input type="text" class="form-control" id="new_project_manager" placeholder="Enter project manager">
+			  </div>
+			  <div class="form-group">
+				<label for="new_project_date">Project Date</label>
+				<input type="text" class="form-control" id="new_project_date" placeholder="Enter project date">
+			  </div>
+
+			  <button type="submit" class="btn btn-default js-proj-panel">Submit New Project</button>
+			</form>
+		</div>
+		
+		<!-- New doc panel -->
+		<div id="new_doc_panel" class="hidden_div">
+			<form class="js-new-doc-panel">
+			  <div class="form-group">
+				<label for="new_job_no">Job Number</label>
+				<!-- <input type="text" class="form-control" id="new_job_no" placeholder="Enter job number"> -->
+				
+				<li class="form-control dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Job Number <span class="caret"></span></a>
+				
+					<ul class="dropdown-menu">
+						{{#each projects}}
+						<li>{{jobno}}</li>
+						{{/each}}
+					</ul>
+				</li>
+				
+			  </div>
+			  <div class="form-group">
+				<label for="new_doc_ref">Document Title</label>
+				<input type="text" class="form-control" id="new_doc_ref" placeholder="Enter document reference">
+			  </div>
+			  <div class="form-group">
+				<label for="new_doc_type">Document Type</label>
+				<input type="text" class="form-control" id="new_doc_type" placeholder="Enter type of document">
+			  </div>
+			  <div class="form-group">
+				<label for="new_doc_title">Document Title</label>
+				<input type="text" class="form-control" id="new_doc_title" placeholder="Enter document title">
+			  </div>
+			  <div class="form-group">
+				<label for="new_doc_author">Document Author</label>
+				<input type="text" class="form-control" id="new_doc_author" placeholder="Enter document author">
+			  </div>
+			  <div class="form-group">
+				<label for="new_doc_date">Document Date</label>
+				<input type="text" class="form-control" id="new_doc_date" placeholder="Enter document date">
+			  </div>
+			  <div class="form-group">
+				<label for="new_doc_location">Document Location</label>
+				<input type="text" class="form-control" id="new_doc_location" placeholder="Enter document location">
+			  </div>
+
+			  <button type="submit" class="btn btn-default js-proj-panel">Submit New Document</button>
+			</form>
+			
+		</div>
+		
+	</div> <!-- end of main container -->
 </template>

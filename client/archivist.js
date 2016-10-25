@@ -15,10 +15,26 @@ Template.main.helpers({
 		return Documents.find({jobno: job}, {sort: {doctype: -1}});
 	},
 	job_no:function(){
-		var job = Session.get("selectedjob");
-		var job_details = Projects.findOne({jobno: job});
-		var job_name = job_details.jobno + " - " + job_details.jobname;
-		return job_name;
+		if(Session.get("selectedjob")){
+			var job = Session.get("selectedjob");
+			var job_details = Projects.findOne({jobno: job});
+			var job_name = job_details.jobno + " - " + job_details.jobname;
+			return job_name;
+		}
+		else{
+			return false;
+		}
+	},
+	isAdmin:function(){
+		var curr_user = Meteor.userId();
+		//console.log(curr_user);
+		if (curr_user){
+			//if (doc.owner == Meteor.userId()){
+			//	return true;
+			//}
+			return true;
+		}
+		return false;
 	}
 });
 
@@ -33,6 +49,8 @@ Template.main.events({
 		$("#project_list").hide();
 		$("#search_panel").toggle('slow');
 		$("#doc_list").hide();
+		$("#new_proj_panel").hide();
+		$("#new_doc_panel").hide();
 	},
 	
 	// toggle projects on/off
@@ -40,6 +58,26 @@ Template.main.events({
 		$("#search_panel").hide();
 		$("#project_list").toggle('slow');
 		$("#doc_list").hide();
+		$("#new_proj_panel").hide();
+		$("#new_doc_panel").hide();
+	},
+	
+	// toggle new projects on/off
+	"click .js-toggle-new-project": function (event) {
+		$("#search_panel").hide();
+		$("#project_list").hide();
+		$("#doc_list").hide();
+		$("#new_proj_panel").toggle('slow');
+		$("#new_doc_panel").hide();
+	},
+	
+	// toggle new documents on/off
+	"click .js-toggle-new-doc": function (event) {
+		$("#search_panel").hide();
+		$("#project_list").hide();
+		$("#doc_list").hide();
+		$("#new_proj_panel").hide();
+		$("#new_doc_panel").toggle('slow');
 	},
 	
 	// Set selected project no.
@@ -51,12 +89,36 @@ Template.main.events({
 		$("#search_panel").hide();
 		$("#project_list").hide();
 		$("#doc_list").toggle('slow');
+		$("#new_proj_panel").hide();
 	},
 	
 	// Set search criteria
 	"submit .js-search-panel": function(event){
-		var criteria = event.target.search_job_no.value;
-		console.log(criteria);
+		// to be completed
+		
+		return false;
+	},
+	
+	// Insert new project into database
+	"submit .js-new-proj-panel":function(event){
+		var jobno = event.target.new_job_no.value;
+		var jobtitle = event.target.new_job_title.value;
+		var pm = event.target.new_project_manager.value;
+		var jobdate = event.target.new_project_date.value;
+		
+		var project = {
+			jobno: jobno,
+			jobname: jobtitle,
+			jobmanager: pm,
+			jobcreated: jobdate
+		};
+		
+		// Update Projects Database
+		Projects.insert(project);
+		
+		// Hide new project panel & display updated list of projects
+		$("#new_proj_panel").hide();
+		$("#project_list").toggle('slow');
 		
 		return false;
 	},
@@ -75,5 +137,7 @@ Template.main.rendered = function() {
 		$("#project_list").hide();
 		$("#search_panel").hide();
 		$("#doc_list").hide();
+		$("#new_proj_panel").hide();
+		$("#new_doc_panel").hide();
     }
 };
