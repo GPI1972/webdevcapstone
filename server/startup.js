@@ -15,6 +15,9 @@ Meteor.startup(function () {
 		Meteor.users.insert({profile:{username:username},
 		emails:[{address:email}],
 		services:{ password:{"bcrypt":"$2a$10$YG4VhAFnNOy6Cj2o4xHfDODfYps8mv0H283jsiIJIGF6imKKZ8xYm"}}});
+		
+		var admin_id = Meteor.users.findOne()._id;
+		Roles.addUsersToRoles(admin_id, [ 'superAdmin' ] );
 	}
 	
 	

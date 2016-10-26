@@ -13,8 +13,3 @@ Router.route('/main', function () {
   this.render('main');
 });
 
-
-//
-//Router.route('/:_id', function () {
-//  this.render('doclist');
-//});

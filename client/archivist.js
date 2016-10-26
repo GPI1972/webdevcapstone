@@ -25,17 +25,19 @@ Template.main.helpers({
 			return false;
 		}
 	},
-	isAdmin:function(){
+	
+});
+
+Template.landing.helpers({
+	// check that a user is logged in
+	isLogged:function(){
 		var curr_user = Meteor.userId();
-		//console.log(curr_user);
+
 		if (curr_user){
-			//if (doc.owner == Meteor.userId()){
-			//	return true;
-			//}
 			return true;
 		}
 		return false;
-	}
+	},
 });
 
 
@@ -147,12 +149,19 @@ Template.main.events({
 		Documents.insert(new_document);
 		
 		// Clear document panel
-		
+		//$(".js-new-doc-panel").reset();
+				
 		return false;
 	},
 	
 });
 
+Template.header.events({
+	// show help/instructions
+	"click .js-show-about":function(){
+		$("#aboutModal").modal("show");		
+	}
+});
 
 
 //////
@@ -169,3 +178,5 @@ Template.main.rendered = function() {
 		$("#new_doc_panel").hide();
     }
 };
+
+
