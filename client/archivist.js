@@ -2,6 +2,13 @@
 // Main client code
 
 //////
+// Subscriptions
+//////
+Meteor.subscribe("projects");
+Meteor.subscribe("documents");
+
+
+//////
 // Template helper functions
 //////
 
@@ -25,7 +32,6 @@ Template.main.helpers({
 			return false;
 		}
 	},
-	
 });
 
 Template.landing.helpers({
@@ -94,13 +100,6 @@ Template.main.events({
 		$("#new_proj_panel").hide();
 	},
 	
-	// Set search criteria
-	"submit .js-search-panel": function(event){
-		// to be completed
-		
-		return false;
-	},
-	
 	// Insert new project into database
 	"submit .js-new-proj-panel":function(event){
 		var jobno = event.target.new_job_no.value;
@@ -116,7 +115,7 @@ Template.main.events({
 		};
 		
 		// Update Projects Database
-		Projects.insert(project);
+		Meteor.call("addNewProj", project);
 		
 		// Hide new project panel & display updated list of projects
 		$("#new_proj_panel").hide();
@@ -146,13 +145,22 @@ Template.main.events({
 		};
 		
 		// Update Documents Database
-		Documents.insert(new_document);
+		// Documents.insert(new_document);
+		Meteor.call("addNewDoc", new_document);
 		
 		// Clear document panel
-		//$(".js-new-doc-panel").reset();
-				
+		$("#new_doc_panel").hide();
+		Session.set("selectedjob", jobno);
+		$("#doc_list").toggle('slow');
+		
 		return false;
 	},
+	
+	// Search for keywords
+	"submit .search_panel": function (e) {
+      //e.preventDefault();
+      //Session.set("searchValue", $("#searchValue").val());
+	}
 	
 });
 
