@@ -29,7 +29,7 @@
 			<form class="js-search-panel">
 			  <div class="form-group">
 				<label for="search_keywords">Key Words</label>
-				<input type="text" class="form-control" id="search_keywords" placeholder="Enter keywords">
+				<input type="text" class="form-control" id="search_keywords" placeholder="Enter key words">
 			  </div>
 			  
 			  <button type="submit" class="btn btn-default js-search-panel">Search</button>
@@ -124,27 +124,26 @@
 		<div id="new_doc_panel" class="hidden_div">
 			<form class="js-new-doc-panel">
 			  <div class="form-group">
-				<label for="new_job_no">Job Number</label>
-				<!-- <input type="text" class="form-control" id="new_job_no" placeholder="Enter job number"> -->
-				
-				<li class="form-control dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Job Number <span class="caret"></span></a>
-				
-					<ul class="dropdown-menu">
-						{{#each projects}}
-						<li>{{jobno}}</li>
-						{{/each}}
-					</ul>
-				</li>
-				
+				<label for="selected_job">Job Details</label>
+				<select class="form-control" id="selected_j">
+					{{#each projects}}
+						<option class="form-control js-select-job">{{jobno}}</option>
+					{{/each}}
+				</select>
 			  </div>
 			  <div class="form-group">
-				<label for="new_doc_ref">Document Title</label>
+				<label for="new_doc_ref">Document Reference</label>
 				<input type="text" class="form-control" id="new_doc_ref" placeholder="Enter document reference">
 			  </div>
 			  <div class="form-group">
 				<label for="new_doc_type">Document Type</label>
+				<!--
 				<input type="text" class="form-control" id="new_doc_type" placeholder="Enter type of document">
+				-->
+				<select class="form-control" id="selected_type">
+					<option class="form-control">drawing</option>
+					<option class="form-control">report</option>
+				</select>
 			  </div>
 			  <div class="form-group">
 				<label for="new_doc_title">Document Title</label>

@@ -1,10 +1,25 @@
 // The Archivist
 // Server code at startup
 
-// start up function that creates entries in the Documents database
 Meteor.startup(function () {
-// code to run on server at startup
+	// code to run on server at startup
 	
+	// Creating dummy admin user for testing purposes
+	// username: 'Admin'
+	// email: 'admin@test.com'
+	// password: admin1234
+	if (!Meteor.users.findOne()){
+		var email = "admin@test.com";
+		var username = "Admin";
+		console.log("Creating admin user.");
+		Meteor.users.insert({profile:{username:username},
+		emails:[{address:email}],
+		services:{ password:{"bcrypt":"$2a$10$YG4VhAFnNOy6Cj2o4xHfDODfYps8mv0H283jsiIJIGF6imKKZ8xYm"}}});
+	}
+	
+	
+	
+	// Creating dummy set of data for testing purposes
 	if (!Projects.findOne()){
 		console.log("No projects found yet. Creating starter data.");
 		Projects.insert({

@@ -123,6 +123,34 @@ Template.main.events({
 		return false;
 	},
 	
+	// Insert new project into database
+	"submit .js-new-doc-panel":function(event){
+		var jobno = $("#selected_j").val();
+		var docref = event.target.new_doc_ref.value;
+		var doctype = $("#selected_type").val();
+		var doctitle = event.target.new_doc_title.value;
+		var docdate = event.target.new_doc_date.value;
+		var docauthor = event.target.new_doc_author.value;
+		var doclocation = event.target.new_doc_location.value;
+		
+		var new_document = {
+			jobno: jobno,
+			docref: docref,
+			doctype: doctype,
+			doctitle: doctitle,
+			docdate: docdate,
+			docauthor: docauthor,
+			doclocation: doclocation
+		};
+		
+		// Update Documents Database
+		Documents.insert(new_document);
+		
+		// Clear document panel
+		
+		return false;
+	},
+	
 });
 
 
